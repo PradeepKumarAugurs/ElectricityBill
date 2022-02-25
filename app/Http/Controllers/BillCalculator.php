@@ -9,7 +9,7 @@ class BillCalculator extends Controller
 {
     public function index(Request $request){
         $data['cities'] = City::get();
-        return view('welcome')->with($data);
+        return view('billcalculator')->with($data);
     }
     public function calculateBill(Request $request){
         if(isset($request->unit) && isset($request->city_id)){

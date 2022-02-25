@@ -1,9 +1,13 @@
-composer create-project laravel/laravel electricBill
-php artisan make:model City -mc
-php artisan make:controller BillCalculator
+git clone https://github.com/PradeepKumarAugurs/ElectricityBill.git
+cd ElectricityBill
+composer update
+first duplicate the .env file and rename into  .env
+php artisan key:generate
+connect database into  ENV  file
 php artisan migrate
 php artisan db:seed
-
+php artisan serve
+run your project on http://localhost:8000/
 
 slabs
 city     start_range end_range  per_unit_cost
@@ -28,8 +32,4 @@ Bhopal
 800
 
 
-connect database into  ENV  file 
-php artisan migrate
-php artisan db:seed
-php artisan serve
-run your project on http://localhost:8000/
+

@@ -3,11 +3,15 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
         <title>Laravel</title>
         <script src="{{URL::asset('Jquery/jquery.min.js')}}"></script>
     </head>
     <body class="antialiased">
+
+    <div class="container">
+        <div class="row">
+        <h1>Bill calculator </h1>
         <form id="calculateBillForm" action="{{url('calculateBill')}}" method="post">
         @csrf
             <div class="form-group">
@@ -32,6 +36,8 @@
         </form>
 
         <h2>Total Bill :: <span class="billAmt"></span></h2>
+        </div>
+    </div>
 
         <script>
             $('#calculateBillForm').submit(function(e){

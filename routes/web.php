@@ -13,5 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','BillCalculator@index');
+Route::get('/','UserController@usersList');
+Route::get('/Billcalculate','BillCalculator@index');
 Route::post('calculateBill','BillCalculator@calculateBill');
+Route::get('adduser','UserController@showAddform');
+Route::post('adduser','UserController@adduser');
+Route::get('usersList','UserController@usersList');

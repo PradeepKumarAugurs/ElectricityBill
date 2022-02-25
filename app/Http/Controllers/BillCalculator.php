@@ -12,7 +12,6 @@ class BillCalculator extends Controller
         return view('welcome')->with($data);
     }
     public function calculateBill(Request $request){
-        // echo  json_encode($request->all());
         if(isset($request->unit) && isset($request->city_id)){
             $unit = $remainingUnit = (float)$request->unit;
             $city_id = $request->city_id;
@@ -20,12 +19,13 @@ class BillCalculator extends Controller
             $getSlab = BillSlab::where('city_id',$city_id)->orderBy('start_range','ASC')->get();
             if(count($getSlab)){
                 foreach ($getSlab as $key => $row) {
-                
                     $unitDiff = $row->end_range - $row->start_range;
-                    if($remainingUnit-$unitDiff == 0){
+                    if($remainingUnit==0){
+                        break;
+                    }
+                    else if($remainingUnit-$unitDiff == 0){
                         $calculateChnages += $remainingUnit*$row->per_unit_cost;
                         $remainingUnit = 0;
-                        break;
                     }
                     else if($remainingUnit-$unitDiff > 0){
                         $calculateChnages += $unitDiff*$row->per_unit_cost;
@@ -34,6 +34,13 @@ class BillCalculator extends Controller
                     else if($remainingUnit-$unitDiff < 0){
                         $calculateChnages += $remainingUnit*$row->per_unit_cost;
                         $remainingUnit -= $remainingUnit;
+                    }
+                }
+
+                if($remainingUnit!=0 && $remainingUnit> 0){
+                    if(count($getSlab)){
+                        $calculateChnages += $remainingUnit*$getSlab[count($getSlab)-1]->per_unit_cost;
+                        $remainingUnit = 0;
                     }
                 }
             }
